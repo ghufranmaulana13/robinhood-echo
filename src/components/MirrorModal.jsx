@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Zap, Shield, ShieldAlert, CheckCircle2, DollarSign, ArrowRight, Lock } from 'lucide-react';
+import { X, Zap, Shield, CheckCircle2, ArrowRight, Lock } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function MirrorModal({ trader, onClose, onConfirmMirror }) {
@@ -18,7 +18,6 @@ export default function MirrorModal({ trader, onClose, onConfirmMirror }) {
     setIsCopying(true);
     setTimeout(() => {
       setIsCopying(false);
-      // Trigger confetti celebration
       confetti({
         particleCount: 100,
         spread: 80,
@@ -41,37 +40,37 @@ export default function MirrorModal({ trader, onClose, onConfirmMirror }) {
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-[rgba(255,255,255,0.08)] transition"
+          className="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-all"
         >
           <X size={20} />
         </button>
 
         {/* Modal Title */}
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-xl bg-[rgba(0,200,5,0.15)] text-[var(--rh-green-light)] border border-[rgba(0,200,5,0.3)]">
+          <div className="p-3 rounded-xl bg-emerald-500/15 text-[var(--rh-green-light)] border border-emerald-500/30">
             <Zap size={24} fill="currentColor" />
           </div>
           <div>
             <h2 className="text-xl font-extrabold font-heading text-white">One-Click Mirror Allocator</h2>
-            <p className="text-xs text-[var(--text-secondary)]">Salin transaksi otomatis dari Pro Trader terverifikasi</p>
+            <p className="text-xs text-slate-400">Copy trades automatically from verified Pro Traders</p>
           </div>
         </div>
 
         {/* Target Trader Profile Card */}
-        <div className="p-4 rounded-xl bg-[rgba(0,0,0,0.4)] border border-[rgba(255,255,255,0.08)] flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="p-4 rounded-xl bg-black/40 border border-white/10 flex items-center justify-between">
+          <div className="flex items-center gap-3.5">
             <img src={targetAvatar} alt={targetName} className="w-12 h-12 rounded-full object-cover border-2 border-[var(--rh-green)]" />
             <div>
               <div className="flex items-center gap-1.5">
                 <h3 className="font-bold text-white text-base">{targetName}</h3>
-                <CheckCircle2 size={14} className="text-[var(--rh-green-light)]" />
+                <CheckCircle2 size={15} className="text-[var(--rh-green-light)]" />
               </div>
-              <div className="text-xs text-[var(--text-muted)]">Verified Echo Pro Trader</div>
+              <div className="text-xs text-slate-400 font-medium">Verified Echo Pro Trader</div>
             </div>
           </div>
 
           <div className="text-right">
-            <div className="text-xs text-[var(--text-muted)]">30d Return</div>
+            <div className="text-xs text-slate-400">30d Return</div>
             <div className="text-base font-extrabold text-[var(--rh-green-light)]">{targetReturn}</div>
           </div>
         </div>
@@ -79,7 +78,7 @@ export default function MirrorModal({ trader, onClose, onConfirmMirror }) {
         {/* Allocation Slider */}
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm">
-            <span className="font-semibold text-slate-200">Jumlah Alokasi Modal:</span>
+            <span className="font-semibold text-slate-200">Capital Allocation Amount:</span>
             <span className="font-mono font-extrabold text-xl text-[var(--rh-green-light)]">${allocation.toLocaleString()}</span>
           </div>
 
@@ -93,26 +92,26 @@ export default function MirrorModal({ trader, onClose, onConfirmMirror }) {
             className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[var(--rh-green)]"
           />
 
-          <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
+          <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Min: $50</span>
             <span>Max: $10,000</span>
           </div>
         </div>
 
         {/* Smart Auto Stop-Loss */}
-        <div className="p-4 rounded-xl bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.05)] space-y-2">
+        <div className="p-4 rounded-xl bg-black/30 border border-white/5 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-200 flex items-center gap-1.5">
               <Shield size={14} className="text-[var(--rh-green-light)]" /> Smart Auto Stop-Loss:
             </span>
-            <span className="text-xs font-mono font-bold text-rose-400">-{stopLoss}% Portofolio</span>
+            <span className="text-xs font-mono font-bold text-rose-400">-{stopLoss}% Portfolio</span>
           </div>
           <div className="flex gap-2">
             {[5, 10, 15, 20].map(sl => (
               <button
                 key={sl}
                 onClick={() => setStopLoss(sl)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
                   stopLoss === sl
                     ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
                     : 'bg-slate-800/60 text-slate-400 hover:text-white'
@@ -122,15 +121,15 @@ export default function MirrorModal({ trader, onClose, onConfirmMirror }) {
               </button>
             ))}
           </div>
-          <p className="text-[11px] text-[var(--text-muted)] leading-tight">
-            Jika kerugian portofolio ter-copy mencapai -{stopLoss}%, sistem akan menghentikan salinan transaksi secara otomatis untuk melindungi dana Anda.
+          <p className="text-[11px] text-slate-400 leading-tight">
+            If your copied portfolio drawdown reaches -{stopLoss}%, the system will automatically close the mirrored positions to protect your capital.
           </p>
         </div>
 
-        {/* Security & Lock note */}
+        {/* Security Note */}
         <div className="flex items-center gap-2 text-[11px] text-slate-400">
           <Lock size={13} className="text-[var(--rh-green)]" />
-          <span>Dana disimpan aman di dompet Robinhood Anda. Anda dapat berhenti kapan saja.</span>
+          <span>Funds remain securely held in your Robinhood account. Stop anytime.</span>
         </div>
 
         {/* Confirm Button */}
@@ -142,11 +141,11 @@ export default function MirrorModal({ trader, onClose, onConfirmMirror }) {
           {isCopying ? (
             <span className="flex items-center gap-2">
               <span className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></span>
-              Memproses Alokasi Mirror...
+              Processing Mirror Allocation...
             </span>
           ) : (
             <span className="flex items-center gap-2">
-              Konfirmasi Mirror Trade (${allocation.toLocaleString()})
+              Confirm Mirror Trade (${allocation.toLocaleString()})
               <ArrowRight size={18} />
             </span>
           )}

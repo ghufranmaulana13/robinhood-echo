@@ -17,11 +17,11 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
         verifiedHash: '0x9f...a83c',
         monthlyReturn: '+28.4%'
       },
-      time: '5 menit lalu',
+      time: '5 mins ago',
       type: 'BUY',
       symbol: 'NVDA',
       assetName: 'NVIDIA Corp',
-      allocation: '8.5% dari Portofolio',
+      allocation: '8.5% of Portfolio',
       price: '$124.50',
       reasoning: 'Breached $122.80 resistance level with 2.4x average volume. Heavy call option buying detected at $130 strike expiring next Friday. Stop loss set at $118.',
       sentimentScore: 92,
@@ -41,11 +41,11 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
         verifiedHash: '0x4e...1b9d',
         monthlyReturn: '+41.2%'
       },
-      time: '18 menit lalu',
+      time: '18 mins ago',
       type: 'CALL SPREAD',
       symbol: 'TSLA',
       assetName: 'Tesla Inc',
-      allocation: '5.0% dari Portofolio',
+      allocation: '5.0% of Portfolio',
       price: '$218.30',
       reasoning: 'Opened Bull Call Spread (220/235) for next month earnings catalyst. High probability reward-to-risk ratio (3.8x).',
       sentimentScore: 88,
@@ -65,11 +65,11 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
         verifiedHash: '0x7c...3e12',
         monthlyReturn: '+62.1%'
       },
-      time: '42 menit lalu',
+      time: '42 mins ago',
       type: 'BUY',
       symbol: 'SOL/USD',
       assetName: 'Solana',
-      allocation: '12.0% dari Portofolio',
+      allocation: '12.0% of Portfolio',
       price: '$182.40',
       reasoning: 'On-chain DEX volume surged 45% today. TVL back above $5.5B. Accumulating spot position with trailing stop.',
       sentimentScore: 95,
@@ -103,18 +103,18 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
           </h1>
 
           <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">
-            Lihat aktivitas eksekusi riil dari Pro Trader terverifikasi secara transparan. Klik <span className="text-[var(--rh-green-light)] font-bold">Echo Trade</span> untuk menyalin transaksi secara otomatis dengan proteksi manajemen risiko.
+            Watch real-time verified execution activity from Pro Traders transparently. Click <span className="text-[var(--rh-green-light)] font-bold">Echo Trade</span> to automatically copy trades with automated risk management protection.
           </p>
 
-          {/* Clean Filter Pill Bar */}
+          {/* Filter Pill Bar */}
           <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-white/5">
             <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mr-2">
-              <Filter size={14} className="text-[var(--rh-green)]" /> Filter Signal:
+              <Filter size={14} className="text-[var(--rh-green)]" /> Filter Signals:
             </span>
             {[
-              { id: 'all', label: 'Semua Sinyal' },
+              { id: 'all', label: 'All Signals' },
               { id: 'tech', label: 'Tech & Stocks' },
-              { id: 'options', label: 'Opsi & Spreads' },
+              { id: 'options', label: 'Options & Spreads' },
               { id: 'crypto', label: 'Crypto & Assets' }
             ].map(f => (
               <button
@@ -133,7 +133,7 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
         </div>
       </div>
 
-      {/* Feed Posts Grid / List */}
+      {/* Feed Posts Grid */}
       <div className="space-y-4">
         {filteredPosts.map(post => {
           const isLiked = likedPosts[post.id];
@@ -186,7 +186,7 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
                       <span className="text-xs text-slate-400 font-medium">({post.assetName})</span>
                     </div>
                     <div className="text-xs text-slate-300 mt-0.5">
-                      Eksekusi: <strong className="text-white font-mono">{post.price}</strong> • Alokasi: <strong className="text-white font-mono">{post.allocation}</strong>
+                      Execution: <strong className="text-white font-mono">{post.price}</strong> • Allocation: <strong className="text-white font-mono">{post.allocation}</strong>
                     </div>
                   </div>
                 </div>
@@ -219,12 +219,12 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
 
                   <div className="flex items-center gap-1.5 hover:text-white cursor-pointer transition">
                     <MessageSquare size={16} />
-                    <span>{post.comments} Diskusi</span>
+                    <span>{post.comments} Discussions</span>
                   </div>
 
                   <div className="flex items-center gap-1.5 text-[var(--rh-green-light)] font-medium">
                     <Repeat size={16} />
-                    <span>{post.echoCount} Trader Menyalin</span>
+                    <span>{post.echoCount} Traders Copying</span>
                   </div>
                 </div>
 

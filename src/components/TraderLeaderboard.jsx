@@ -80,13 +80,13 @@ export default function TraderLeaderboard({ onSelectTraderForMirror }) {
             <span className="badge badge-gold">
               <Award size={14} /> PRO LEADERBOARD
             </span>
-            <span className="text-xs text-slate-400">Peringkat Terverifikasi Minggu Ini</span>
+            <span className="text-xs text-slate-400">Verified Weekly Rankings</span>
           </div>
           <h2 className="text-2xl font-bold font-heading text-white">
             Top Echo <span className="text-[var(--rh-green)]">Pro Traders</span>
           </h2>
           <p className="text-xs text-slate-300 mt-1">
-            Melacak performa transaksi nyata yang terverifikasi. Pilih trader untuk menyalin portofolio mereka secara transparan.
+            Tracking real, verified transaction performance. Select a trader to transparently copy their portfolio.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ export default function TraderLeaderboard({ onSelectTraderForMirror }) {
         {filteredTraders.map((trader) => (
           <div key={trader.rank} className="glass-panel-interactive p-6 flex flex-col justify-between space-y-5">
             
-            {/* Card Header: Rank Badge & Profile */}
+            {/* Card Header */}
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-3.5">
                 <div className="relative">
