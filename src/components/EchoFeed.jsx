@@ -87,30 +87,29 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Banner Intro */}
-      <div className="glass-panel p-6 relative overflow-hidden">
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-30 pointer-events-none hidden md:block">
-          <img src="/hero.jpg" alt="Echo UI preview" className="w-full h-full object-cover rounded-r-2xl" />
-        </div>
-        <div className="relative z-10 max-w-2xl">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="badge badge-green">
-              <Radio size={12} className="animate-pulse" /> LIVE STREAM
+    <div className="space-y-6 w-full">
+      {/* Sleek Hero Banner Container */}
+      <div className="glass-panel p-6 sm:p-8 relative overflow-hidden bg-gradient-to-r from-[#12161f] via-[#151b27] to-[#0f141d]">
+        <div className="max-w-3xl space-y-4">
+          <div className="flex items-center gap-3">
+            <span className="badge badge-green py-1 px-3">
+              <Radio size={13} className="animate-pulse" /> LIVE STREAMING
             </span>
-            <span className="text-xs text-[var(--text-secondary)]">2,481 Active Mirror Traders Online</span>
+            <span className="text-xs text-slate-400 font-medium">2,481 Active Mirror Traders Online</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 font-heading">
+
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-heading">
             Verified Trade <span className="text-[var(--rh-green)]">Echo Stream</span>
           </h1>
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-            Lihat aktivitas eksekusi riil dari Pro Trader terverifikasi secara transparan. Klik <span className="text-[var(--rh-green-light)] font-semibold">Echo Trade</span> untuk menyalin transaksi secara otomatis dengan proteksi manajemen risiko.
+
+          <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">
+            Lihat aktivitas eksekusi riil dari Pro Trader terverifikasi secara transparan. Klik <span className="text-[var(--rh-green-light)] font-bold">Echo Trade</span> untuk menyalin transaksi secara otomatis dengan proteksi manajemen risiko.
           </p>
 
-          {/* Filter Bar */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-[var(--text-muted)] flex items-center gap-1 mr-2">
-              <Filter size={14} /> Filter Signal:
+          {/* Clean Filter Pill Bar */}
+          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-white/5">
+            <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mr-2">
+              <Filter size={14} className="text-[var(--rh-green)]" /> Filter Signal:
             </span>
             {[
               { id: 'all', label: 'Semua Sinyal' },
@@ -121,10 +120,10 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
               <button
                 key={f.id}
                 onClick={() => setFilter(f.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                   filter === f.id 
-                    ? 'bg-[var(--rh-green)] text-black font-bold shadow-[0_2px_10px_var(--rh-green-glow)]' 
-                    : 'bg-[rgba(255,255,255,0.05)] text-slate-300 hover:bg-[rgba(255,255,255,0.1)]'
+                    ? 'bg-[var(--rh-green)] text-black shadow-[0_4px_15px_rgba(0,200,5,0.3)]' 
+                    : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
                 }`}
               >
                 {f.label}
@@ -134,62 +133,60 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
         </div>
       </div>
 
-      {/* Feed List */}
+      {/* Feed Posts Grid / List */}
       <div className="space-y-4">
         {filteredPosts.map(post => {
           const isLiked = likedPosts[post.id];
           return (
-            <div key={post.id} className="glass-panel-interactive p-5 sm:p-6 space-y-4">
+            <div key={post.id} className="glass-panel-interactive p-6 space-y-5">
               
-              {/* Header: Trader Info */}
+              {/* Header: Trader Profile Info */}
               <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3.5">
                   <div className="relative">
                     <img 
                       src={post.trader.avatar} 
                       alt={post.trader.name} 
-                      className="w-12 h-12 rounded-full object-cover border-2 border-[var(--border-color)]"
+                      className="w-12 h-12 rounded-full object-cover border-2 border-white/10 shadow-sm"
                     />
-                    <div className="absolute -bottom-1 -right-1 bg-[var(--rh-green)] rounded-full p-0.5 border border-[var(--bg-dark)]">
-                      <ShieldCheck size={12} className="text-black" />
+                    <div className="absolute -bottom-1 -right-1 bg-[var(--rh-green)] rounded-full p-0.5 border border-black">
+                      <ShieldCheck size={13} className="text-black" />
                     </div>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="font-bold text-white text-base font-heading">{post.trader.name}</h3>
-                      <span className="text-xs text-[var(--text-muted)] font-mono">{post.trader.handle}</span>
+                      <span className="text-xs text-slate-400 font-mono">{post.trader.handle}</span>
                       <span className="badge badge-purple text-[10px]">{post.trader.riskLevel}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-xs text-[var(--text-secondary)] mt-0.5">
+                    <div className="flex items-center gap-4 text-xs text-slate-300 mt-1">
                       <span>Win Rate: <strong className="text-white">{post.trader.winRate}</strong></span>
-                      <span>30d ROI: <strong className="text-[var(--rh-green-light)]">{post.trader.monthlyReturn}</strong></span>
-                      <span className="text-[var(--text-muted)] font-mono hidden sm:inline">Proof: {post.trader.verifiedHash}</span>
+                      <span>30d ROI: <strong className="text-[var(--rh-green-light)] font-bold">{post.trader.monthlyReturn}</strong></span>
+                      <span className="text-slate-500 font-mono hidden sm:inline">Proof: {post.trader.verifiedHash}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="text-right">
-                  <span className="text-xs text-[var(--text-muted)]">{post.time}</span>
-                </div>
+                <span className="text-xs text-slate-400 font-medium shrink-0">{post.time}</span>
               </div>
 
-              {/* Signal Card Box */}
-              <div className="p-4 rounded-xl bg-[rgba(0,0,0,0.4)] border border-[rgba(255,255,255,0.06)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className={`p-3 rounded-xl flex items-center justify-center font-extrabold text-sm ${
+              {/* Signal Box Container */}
+              <div className="p-4 rounded-2xl bg-black/40 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3.5">
+                  <div className={`px-3 py-2 rounded-xl flex items-center justify-center font-extrabold text-xs tracking-wide shrink-0 ${
                     post.type.includes('BUY') || post.type.includes('CALL') 
-                      ? 'bg-[rgba(0,200,5,0.15)] text-[var(--rh-green-light)] border border-[rgba(0,200,5,0.3)]' 
-                      : 'bg-[rgba(255,69,91,0.15)] text-[var(--rh-red)] border border-[rgba(255,69,91,0.3)]'
+                      ? 'bg-emerald-500/15 text-[var(--rh-green-light)] border border-emerald-500/30' 
+                      : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
                   }`}>
                     {post.type}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-extrabold font-heading text-white">{post.symbol}</span>
-                      <span className="text-xs text-[var(--text-secondary)]">({post.assetName})</span>
+                      <span className="text-xs text-slate-400 font-medium">({post.assetName})</span>
                     </div>
-                    <div className="text-xs text-[var(--text-secondary)] mt-0.5">
-                      Eksekusi: <strong className="text-white">{post.price}</strong> • Alokasi: <strong className="text-white">{post.allocation}</strong>
+                    <div className="text-xs text-slate-300 mt-0.5">
+                      Eksekusi: <strong className="text-white font-mono">{post.price}</strong> • Alokasi: <strong className="text-white font-mono">{post.allocation}</strong>
                     </div>
                   </div>
                 </div>
@@ -197,20 +194,20 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
                 {/* Action CTA: Echo Trade */}
                 <button 
                   onClick={() => onSelectTraderForMirror(post)}
-                  className="btn-primary py-2.5 px-5 text-xs sm:text-sm whitespace-nowrap"
+                  className="btn-primary py-2.5 px-6 text-sm shrink-0"
                 >
                   <Zap size={16} fill="currentColor" />
                   Echo Trade
                 </button>
               </div>
 
-              {/* Reasoning Description */}
-              <p className="text-sm text-slate-200 leading-relaxed">
+              {/* Trade Reasoning */}
+              <p className="text-sm text-slate-200 leading-relaxed font-normal">
                 {post.reasoning}
               </p>
 
               {/* Footer Engagement */}
-              <div className="flex items-center justify-between pt-3 border-t border-[var(--border-color)] text-xs text-[var(--text-secondary)]">
+              <div className="flex items-center justify-between pt-3 border-t border-white/5 text-xs text-slate-400">
                 <div className="flex items-center gap-6">
                   <button 
                     onClick={() => toggleLike(post.id)}
@@ -220,19 +217,19 @@ export default function EchoFeed({ onSelectTraderForMirror }) {
                     <span>{post.likes + (isLiked ? 1 : 0)}</span>
                   </button>
 
-                  <div className="flex items-center gap-1.5 hover:text-white cursor-pointer">
+                  <div className="flex items-center gap-1.5 hover:text-white cursor-pointer transition">
                     <MessageSquare size={16} />
                     <span>{post.comments} Diskusi</span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-[var(--rh-green-light)]">
+                  <div className="flex items-center gap-1.5 text-[var(--rh-green-light)] font-medium">
                     <Repeat size={16} />
                     <span>{post.echoCount} Trader Menyalin</span>
                   </div>
                 </div>
 
-                <div className="hidden sm:flex items-center gap-1 bg-[rgba(0,200,5,0.08)] px-2.5 py-1 rounded-full border border-[rgba(0,200,5,0.2)] text-[11px] text-[var(--rh-green-light)]">
-                  <Sparkles size={12} />
+                <div className="flex items-center gap-1.5 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 text-xs text-[var(--rh-green-light)] font-semibold">
+                  <Sparkles size={13} />
                   <span>AI Score: <strong>{post.sentimentScore}/100</strong></span>
                 </div>
               </div>
